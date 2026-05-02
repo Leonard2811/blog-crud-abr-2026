@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView,DetailView, CreateView, UpdateView, DeleteView
 from .models import Article
 from django.urls import reverse_lazy
@@ -13,17 +14,17 @@ class ArticleDetailView(DetailView):
     template_name = 'article-detail.html'
     context_object_name = 'article'
 
-class ArticleCreateView(CreateView):
+class ArticleCreateView(LoginRequiredMixin, CreateView):
     model = Article
     template_name = 'article-create.html'
     fields = ['title', 'content', 'author']
 
-class ArticleUpdateView(UpdateView):
+class ArticleUpdateView(LoginRequiredMixin, UpdateView):
     model = Article
     template_name = 'article-update.html'
     fields = ['title', 'content']
 
-class ArticleDeleteView(DeleteView):
+class ArticleDeleteView(LoginRequiredMixin, DeleteView):
     model = Article
     template_name = 'article-delete.html'
     success_url = reverse_lazy('articles_list')

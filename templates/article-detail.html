@@ -5,6 +5,9 @@
     <p>><strong>Autor:</strong> {{ article.author }}</p>
     <small>Fecha de creación: {{ article.created_at }}</small>
     <p><strong>Contenido:</strong> {{ article.content }}</p>
-    <a href="{% url 'article_update' article.id %}">Editar</a> |
-    <a href="{% url 'article_delete' article.id %}">Eliminar</a>
+    <!-- Enlaces para editar y eliminar el artículo solo si el usuario está autenticado y es el autor -->
+    {% if user.is_authenticated and user == article.author %}
+        <a href="{% url 'article_update' article.id %}">Editar</a> |
+        <a href="{% url 'article_delete' article.id %}">Eliminar</a>
+    {% endif %}
 {% endblock content %}
