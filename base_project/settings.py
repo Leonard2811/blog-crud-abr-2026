@@ -122,3 +122,4 @@ STATICFILES_DIRS = [
 ]
 
 LOGIN_REDIRECT_URL = 'articles_list'
+LOGOUT_REDIRECT_URL = 'articles_list'
